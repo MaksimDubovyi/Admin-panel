@@ -8,8 +8,8 @@ const Info =()=>{
 
     return(
       <Box m={5}>
-      <Box m={3} >
-        <Link component="button" variant="button" href="#Button" underline="hover" m={5}>Button</Link>
+      <Box m={3}>
+        <Link component="button" variant="button" href="#Button" underline="hover" >Button</Link>
         <Link component="button" variant="button" href="#Button" underline="hover" >Button</Link>
       </Box>
   <ul>
