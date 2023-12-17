@@ -1,7 +1,12 @@
-import Link from "next/link";
-import { AppBar, Box, Button, Container, IconButton, Toolbar, Typography } from '@mui/material';
+
+import { Box, Button } from '@mui/material';
+import { usePathname } from "next/navigation";
+
 
 const ButtonLink = ({ navLinks }) => {
+  const pathname = usePathname();
+
+
   return (
     <Box
       flexGrow={1}
@@ -13,17 +18,17 @@ const ButtonLink = ({ navLinks }) => {
       border={2}
       borderColor="white"
       borderRadius={5}
-      boxShadow="1px 2px 3px red"
-    >
-      {navLinks.map((link) => (
+      boxShadow="5px 8px 10px grey"
+    > 
+      {navLinks.map((link) => {
+                   const isActive = pathname === link.href;
+                   const linkClasses = isActive ? `secondary` : "success";
+        return (
+
         <Box key={link.href} mr={1} ml={1}>
-          <Link href={link.href} passHref>
-            <Button color="inherit" variant="outlined">
-              {link.label}
-            </Button>
-          </Link>
+          <Button  component="a" href={link.href} variant='contained' color={linkClasses}>{link.label}</Button>
         </Box>
-      ))}
+      )})}
     </Box>
   );
 };
