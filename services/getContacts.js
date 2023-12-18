@@ -21,6 +21,23 @@ const URL2='http://localhost:3000';
 
 // }
 
+const lessons =[
+    {
+        title:'hi',
+        name:'Max',
+
+    }
+];
+
+export function getAllasd(){
+    return lessons;
+}
+
+export default async function lessoHandler(request, response)
+{
+    return response.status(200).send(getAllasd());
+}
+
 export const getContacts = async () => {
     try {
         const response = await fetch(URL2 + '/api/contacts', {

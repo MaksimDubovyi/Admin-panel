@@ -1,10 +1,10 @@
-import { Grid, List, ListItem, ListItemText, Typography,Box, Button, Link } from "@mui/material";
+import { Grid,  Typography,Box, Button } from "@mui/material";
 
 
   
 
 
-const Info =()=>{
+export default function Info (){
 
     return (
       <Box m={5}>
@@ -92,18 +92,7 @@ const Info =()=>{
               </li>
             </ul>
           </li>
-          <li>
-            <strong>6. </strong>
-          </li>
-          <li>
-            <strong>7. </strong>
-          </li>
-          <li>
-            <strong>8. </strong>
-          </li>
-          <li>
-            <strong>9. </strong>
-          </li>
+  
           <li id="Button">
             <strong>10. Button variant='contained,outlined,text'</strong>
             <ul>
@@ -216,4 +205,3 @@ const Info =()=>{
     );
 }
 
-export default Info;
