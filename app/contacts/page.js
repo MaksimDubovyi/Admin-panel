@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import ContactsList from "../components/ContactsList";
 import {ContactSearch} from "../components/ContactSearch";
 import { Container } from "@mui/system";
-import { getContacts } from "@/services/getContacts";
+import { getContacts } from "../../services/getContacts";
 import Loading from "../loading";
 
 

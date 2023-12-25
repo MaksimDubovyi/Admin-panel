@@ -6,25 +6,11 @@ import { useState } from 'react';
 
 
 
-
-// const Root = styled.div`
-//   position: relative;
-//   display: inline-block;
-//   width: 32px;
-//   height: 20px;
-//   background-color: red;
-  
-// `;
-
-
-
 const Header = () =>{
 
     const navigation =[
         {label:"Home", href:"/"},
         {label:"Contacts", href:"/contacts"},
-        {label:"Inf", href:"/info"},
-        {label:"Git", href:"/git"},
     ]
 
     const [open,setOpe]=useState(false);
@@ -41,16 +27,13 @@ const Header = () =>{
         <AppBar position="fixed">
           <Container fixed>
             <Toolbar>
-              <IconButton edge="start" color="inherit" aria-label="menu">
-                <MenuIcon />
-              </IconButton>
 
-                <Typography variant="h5" mr={5} ml={5}>Material UI && NEXT.JS</Typography>
+                <Typography variant="h5" mr={2} ml={2}>Material UI && NEXT.JS</Typography>
 
 
                 <ButtonLink navLinks={navigation}/>
 
-                  <Box   ml={15}>
+                  <Box   ml={5}>
                    <Button  variant='outlined' color="inherit" onClick={handleClickOpen}>Log In</Button>
                    
                    <Dialog open={open} onClose={handleClose} aria-labelledby='form-dialog-title'>

@@ -6,7 +6,7 @@ import Contact from "./Contact";
 export default  function ContactsList ({contacts}) {
 
     return(
-            <Grid container  spacing={4}>
+            <Grid container mb={25}  spacing={4}>
                 <Contact contacts={contacts}></Contact>
             </Grid>   
     )

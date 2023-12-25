@@ -1,6 +1,6 @@
 'use client';
 import SearchSharpIcon from '@mui/icons-material/SearchSharp';
-import { getContactsBySearch } from "@/services/getContacts";
+import { getContactsBySearch } from "../../services/getContacts";
 import { useState } from "react";
 import { Box, IconButton, TextField } from '@mui/material';
 

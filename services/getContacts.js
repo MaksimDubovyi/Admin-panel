@@ -2,41 +2,7 @@
 
 const URL1='https://next-js-one-henna.vercel.app';
 const URL2='http://localhost:3000';
-// export const getContacts = async () =>{
 
-//     try{
-//         const response = await fetch(URL2+'/api/contacts',{
-//             next:{
-//                 revalidate:250
-//             }
-//         });
-    
-//         if(!response.ok)throw new Error("Unable to fetch contacts");
-    
-//         return response.json();
-//     }
-//     catch{
-//         return null
-//     }
-
-// }
-
-const lessons =[
-    {
-        title:'hi',
-        name:'Max',
-
-    }
-];
-
-export function getAllasd(){
-    return lessons;
-}
-
-export default async function lessoHandler(request, response)
-{
-    return response.status(200).send(getAllasd());
-}
 
 export const getContacts = async () => {
     try {
@@ -103,28 +69,3 @@ export  const getContactsId = async (id)=> {
     }
 
 
-    export const getContactsPost = async () => {
-        try {
-            const response = await fetch(URL2 + '/api/contacts', {
-                method: 'POST', // Вказати метод POST
-                headers: {
-                    // Додати необхідні заголовки, якщо потрібно
-                    'Content-Type': 'application/json',
-                    // Інші заголовки...
-                },
-                body: JSON.stringify({
-                    // Якщо ви відправляєте дані, вкажіть їх тут
-                    // Наприклад, { key1: 'value1', key2: 'value2' }
-                }),
-                next: {
-                    revalidate: 250,
-                },
-            });
-    
-            if (!response.ok) throw new Error("Unable to fetch contacts");
-    
-            return response.json();
-        } catch {
-            return null;
-        }
-    }

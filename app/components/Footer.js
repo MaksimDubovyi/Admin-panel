@@ -14,11 +14,8 @@ const handleChange=(event,newValue)=>{
     setValue(newValue)
 }
     return(
-        <div style={{position:'relative', bottom:'0',width:'100%', marginTop:'20px'}}>
+        <div style={{position:'fixed', bottom:'0',width:'100%', height:"100px",  backgroundColor:'white'}}>
         <hr/>
-        <Typography align='center' variant='h6' gutterBottom>
-            Foter
-          </Typography>
           <BottomNavigation
             value={value}
             onChange={handleChange}
