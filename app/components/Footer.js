@@ -14,31 +14,10 @@ const handleChange=(event,newValue)=>{
     setValue(newValue)
 }
     return(
-        <div style={{position:'fixed', bottom:'0',width:'100%', height:"100px",  backgroundColor:'white'}}>
+        <div style={{position:'fixed', bottom:'0',width:'100%', height:"50px",  backgroundColor:'black' }}>
         <hr/>
-          <BottomNavigation
-            value={value}
-            onChange={handleChange}
-          >
-            <BottomNavigationAction
-              label="Favorite"
-              value="favorite"
-              icon={<FavoriteRoundedIcon/>}
-            />
-
-            <BottomNavigationAction
-              label="Location"
-              value="location"
-              icon={<LocationOnRoundedIcon/>}
-            />
-
-            <BottomNavigationAction
-              label="Folder"
-              value="folder"
-              icon={<FolderRoundedIcon/>}
-            />
-          </BottomNavigation>
-          <Typography align='center' color='textSecondaty' component='p' variant='subtitle1'>
+    
+          <Typography mt={1} align='center' color='textSecondaty' component='p' variant='subtitle1' sx={{color:'white'}} >
             Next.js React Material Ui side
           </Typography>
         </div>

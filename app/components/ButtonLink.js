@@ -15,14 +15,13 @@ const ButtonLink = ({ navLinks }) => {
       alignItems="center"
       m={2}
       p={2}
-      border={2}
-      borderColor="white"
-      borderRadius={5}
-      boxShadow="5px 8px 10px grey"
+
+
+      boxShadow="2px 2px 10px grey"
     > 
       {navLinks.map((link) => {
                    const isActive = pathname === link.href;
-                   const linkClasses = isActive ? `secondary` : "success";
+                   const linkClasses = isActive ? `error` : "inherit";
         return (
 
         <Box key={link.href} mr={1} ml={1}>

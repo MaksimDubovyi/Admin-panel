@@ -1,8 +1,6 @@
 import {InputLabel,MenuItem,FormControl,Select} from '@mui/material';
 
 
-
-
 const FormSelect = ({value,label,data,handleChange})=>{
 
     return(<FormControl fullWidth sx={{mt:"20px"}}>

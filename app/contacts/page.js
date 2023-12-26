@@ -1,17 +1,16 @@
 
 'use client';
-import Link from "next/link";
-import Image from 'next/image'
 import { useEffect, useState } from "react";
-
-import ContactsList from "../components/ContactsList";
 import {ContactSearch} from "../components/ContactSearch";
 import { Container } from "@mui/system";
 import { getContacts } from "../../services/getContacts";
-import Loading from "../loading";
-
-
-
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import ContactList, { StyledTableCell } from "../components/ContactList";
 
 
 export default  function Contacts () {
@@ -22,12 +21,33 @@ useEffect(()=>{
     getContacts().then(setContacts);
 },[]);
 
+
 return(
     <Container sx={{mt:'30px'}}>
-        <h1>Contacts</h1>
+        <h1>Contacts</h1> 
         <ContactSearch onSearch={setContacts}/>
-        <ContactsList contacts={contacts}/>
-        <Loading/>
-    </Container>
+
+        <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 700 }} aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell style={{ fontSize: '26px' }}>Name</StyledTableCell>
+                  <StyledTableCell style={{ fontSize: '26px' }} align="right">Login</StyledTableCell>
+                  <StyledTableCell style={{ fontSize: '26px' }} align="right">Gender</StyledTableCell>
+                  <StyledTableCell style={{ fontSize: '26px' }} align="right">Phone</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {contacts.map((item) => (
+                
+                   <ContactList item={item} key={item._id.$oid}/>
+                
+                ))}
+              </TableBody>
+            </Table>  
+        </TableContainer>
+
+     </Container>
 )
+
 }
