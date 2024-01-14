@@ -1,5 +1,20 @@
 const formComponents = [
   {
+    name: "login",
+    type: "text",
+    label: "Login",
+  },
+  {
+    name: "name",
+    type: "text",
+    label: "Name",
+  },
+  {
+    name: "dof",
+    type: "date",
+    label: "Dof",
+  },
+  {
     name: "workName",
     type: "text",
     label: "WorkName",
@@ -106,12 +121,12 @@ const formComponents = [
   },
   {
     name: "hobbies",
-    type: "nestedList",
+    type: "hobbieslist",
     label: "HOBBIES",
   },
   {
     name: "goal",
-    type: "nestedList",
+    type: "goal",
     label: "GOALS",
   },
 ];

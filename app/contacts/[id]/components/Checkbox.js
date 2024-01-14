@@ -1,18 +1,19 @@
 import { Switch, FormControlLabel, Grid } from "@mui/material";
 
-const Checkbox = ({ profile, label, name, handleChangeValue }) => {
+const Checkbox = ({ config, values, handleBlur, handleChange }) => {
   return (
     <Grid item xs={6} md={4} lg={2}>
       <FormControlLabel
         control={
           <Switch
-            name={name}
-            id={name}
-            checked={profile[name]}
-            onChange={(event) => handleChangeValue(event.target.checked, name)}
+            name={config.name}
+            id={config.name}
+            checked={values[config.name]}
+            onChange={handleChange}
+            onBlur={handleBlur}
           />
         }
-        label={label}
+        label={config.label}
       />
     </Grid>
   );

@@ -48,3 +48,27 @@ a {
   background-color: #000000;
   border-radius: 50px; /* Зробити скролбар круглим */
 }
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+/* .form-group {
+  margin-bottom: 1rem;
+} */
+
+input {
+  padding: 0.75rem 1rem;
+  margin-right: 1rem;
+}
+
+/* button {
+  background: #c33364;
+  color: white;
+  border: 1px solid #c33364;
+  border-radius: 5px;
+  padding: 0.75rem 2rem;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  cursor: pointer;
+} */

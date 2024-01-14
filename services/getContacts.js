@@ -1,5 +1,5 @@
 const URL1 = "https://next-js-one-henna.vercel.app";
-const URL2 = "http://localhost:3000";
+const URL2 = "http://localhost:3001";
 
 export const getContacts = async () => {
   try {

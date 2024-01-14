@@ -24,7 +24,7 @@ export const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export default function ContactList({ item }) {
+const ContactList = ({ item }) => {
   return (
     <StyledTableRow>
       <StyledTableCell component="th" scope="row">
@@ -45,4 +45,6 @@ export default function ContactList({ item }) {
       </StyledTableCell>
     </StyledTableRow>
   );
-}
+};
+
+export { ContactList };

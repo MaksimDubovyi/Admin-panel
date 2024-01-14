@@ -1,16 +1,31 @@
 "use client";
 import { TextField } from "@mui/material";
 
-const TextInput = ({ profile, label, name, handleChangeValue }) => {
+const TextInput = ({
+  config,
+  values,
+  errors,
+  touched,
+  handleBlur,
+  handleChange,
+}) => {
   return (
-    <TextField
-      margin="dense"
-      label={label}
-      type="text"
-      value={profile[name]}
-      fullWidth
-      onChange={(event) => handleChangeValue(event.target.value, name)}
-    />
+    <>
+      <TextField
+        sx={{ mt: 2 }}
+        fullWidth
+        margin="dense"
+        label={config.label}
+        type={config.type}
+        value={values[config.name]}
+        name={config.name}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+      {errors[config.name] && touched[config.name] && (
+        <div style={{ color: "red" }}>{errors[config.name]}</div>
+      )}
+    </>
   );
 };
 

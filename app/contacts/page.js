@@ -9,7 +9,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import ContactList, { StyledTableCell } from "../components/ContactList";
+import { ContactList, StyledTableCell } from "../components/ContactList";
 
 export default function Contacts() {
   const [contacts, setContacts] = useState([]);
