@@ -4,7 +4,7 @@ import { Formik } from "formik";
 import { Container, Button, Grid, Typography } from "@mui/material";
 import { TextInput } from "./TextInput";
 import { Checkbox } from "./Checkbox";
-import Loading from "/app/loading";
+import Loading from "../../../loading";
 import { FormSelect } from "./FormSelect";
 import { SmartList } from "./SmartList";
 import { formComponents } from "./DataFormComponents";
@@ -71,7 +71,7 @@ const FormikForm = ({ profile }) => {
   if (profile === null) {
     return (
       <div className="container">
-        <h1>Contact is not available</h1>
+        <h1>Contact loading...</h1>
         <Loading />
       </div>
     );

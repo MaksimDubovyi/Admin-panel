@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
-
+import { Providers } from "./components/Providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -28,13 +28,15 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
         />
-      </head>
+      </head>{" "}
       <body className={inter.className}>
-        <Header />
-        <main style={{ marginBottom: "75px" }}>{children}</main>
-        <footer>
-          <Footer />
-        </footer>
+        <Providers>
+          <Header />
+          <main style={{ marginBottom: "75px" }}>{children}</main>
+          <footer>
+            <Footer />
+          </footer>
+        </Providers>
       </body>
     </html>
   );

@@ -1,6 +1,7 @@
 import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
+import Link from "next/link";
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -23,26 +24,15 @@ export const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-
+const properties = ["name", "login", "sex", "phone"];
 const ContactList = ({ item }) => {
   return (
     <StyledTableRow>
-      <StyledTableCell component="th" scope="row">
-        {" "}
-        <a href={`/contacts/${item._id.$oid}`}>{item.name}</a>
-      </StyledTableCell>
-      <StyledTableCell align="right">
-        {" "}
-        <a href={`/contacts/${item._id.$oid}`}>{item.login}</a>
-      </StyledTableCell>
-      <StyledTableCell align="right">
-        {" "}
-        <a href={`/contacts/${item._id.$oid}`}>{item.sex}</a>
-      </StyledTableCell>
-      <StyledTableCell align="right">
-        {" "}
-        <a href={`/contacts/${item._id.$oid}`}>{item.phone}</a>
-      </StyledTableCell>
+      {properties.map((e) => (
+        <StyledTableCell key={e}>
+          <Link href={`/contacts/${item._id}`}>{item[e]}</Link>
+        </StyledTableCell>
+      ))}
     </StyledTableRow>
   );
 };

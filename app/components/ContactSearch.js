@@ -3,15 +3,17 @@ import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 import { getContactsBySearch } from "../../services/getContacts";
 import { useState } from "react";
 import { Box, IconButton, TextField } from "@mui/material";
+import { useSession } from "next-auth/react";
 
 const ContactSearch = ({ onSearch }) => {
   const [search, setSearch] = useState("");
-
+  const { data: session } = useSession();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const contacts = await getContactsBySearch(search);
-
-    onSearch(contacts);
+    if (session && session.user) {
+      const contacts = await getContactsBySearch(search, session.user.email);
+      onSearch(contacts);
+    }
   };
 
   return (

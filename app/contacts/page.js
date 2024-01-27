@@ -3,28 +3,41 @@ import { useEffect, useState } from "react";
 import { ContactSearch } from "../components/ContactSearch";
 import { Container } from "@mui/system";
 import { getContacts } from "../../services/getContacts";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import {
+  Table,
+  TableBody,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
 import { ContactList, StyledTableCell } from "../components/ContactList";
+import { useSession } from "next-auth/react";
+import Loading from "../loading";
 
 export default function Contacts() {
   const [contacts, setContacts] = useState([]);
-
+  const { data: session } = useSession();
   useEffect(() => {
-    getContacts().then(setContacts);
-  }, []);
-
+    if (session && session.user) {
+      getContacts(session.user.email).then(setContacts);
+    }
+  }, [session]);
+  if (contacts.length === 0) {
+    return (
+      <div className="container">
+        <h1>Contacts loading...</h1>
+        <Loading />
+      </div>
+    );
+  }
   return (
     <Container sx={{ mt: "30px" }}>
       <h1>Contacts</h1>
       <ContactSearch onSearch={setContacts} />
 
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+        <Table sx={{ minWidth: 700 }}>
           <TableHead>
             <TableRow>
               <StyledTableCell>Name</StyledTableCell>
@@ -35,7 +48,7 @@ export default function Contacts() {
           </TableHead>
           <TableBody>
             {contacts.map((item) => (
-              <ContactList item={item} key={item._id.$oid} />
+              <ContactList item={item} key={item._id} />
             ))}
           </TableBody>
         </Table>

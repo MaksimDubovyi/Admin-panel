@@ -7,6 +7,7 @@ const Header = () => {
   const navigation = [
     { label: "Home", href: "/" },
     { label: "Contacts", href: "/contacts" },
+    { label: "Complaints", href: "/complaints" },
   ];
 
   const darkTheme = createTheme({

@@ -1,12 +1,12 @@
-const URL1 = "https://next-js-one-henna.vercel.app";
-const URL2 = "http://localhost:3001";
+const URL2 = "http://localhost:3000";
 
-export const getContacts = async () => {
+export const getContacts = async (token) => {
   try {
     const response = await fetch(URL2 + "/api/contacts", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       next: {
         revalidate: 250,
@@ -21,9 +21,14 @@ export const getContacts = async () => {
   }
 };
 
-export const getContactsBySearch = async (search) => {
+export const getContactsBySearch = async (search, token) => {
   try {
     const response = await fetch(URL2 + `/api/contacts?search=${search}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       next: {
         revalidate: 250,
       },
@@ -36,9 +41,14 @@ export const getContactsBySearch = async (search) => {
     return null;
   }
 };
-export const getContactsId = async (id) => {
+export const getContactsId = async (id, token) => {
   try {
     const response = await fetch(URL2 + `/api/contacts/?contact=${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       next: {
         revalidate: 250,
       },
