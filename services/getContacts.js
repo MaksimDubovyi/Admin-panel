@@ -1,63 +1,49 @@
-const URL2 = "http://localhost:3000";
-
-export const getContacts = async (token) => {
+"use server";
+const getAllContacts = async (token) => {
   try {
-    const response = await fetch(URL2 + "/api/contacts", {
+    const url = process.env.NEXT_URL_GET_USERS;
+    const response = await fetch(url, {
+      next: {
+        revalidate: 150,
+      },
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      next: {
-        revalidate: 250,
-      },
     });
-
-    if (!response.ok) throw new Error("Unable to fetch contacts");
-
+    if (!response.ok) {
+      throw new Error("Unable to fetch contacts");
+    }
     return response.json();
-  } catch {
+  } catch (error) {
     return null;
   }
 };
 
+export const getContacts = async (token) => {
+  const response = await getAllContacts(token);
+  return response;
+};
 export const getContactsBySearch = async (search, token) => {
   try {
-    const response = await fetch(URL2 + `/api/contacts?search=${search}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      next: {
-        revalidate: 250,
-      },
-    });
-
-    if (!response.ok) throw new Error("Unable to fetch contacts");
-
-    return response.json();
+    const response = await getAllContacts(token);
+    const currentContacts = response.filter((contactItem) =>
+      contactItem.name.toLowerCase().includes(search.toLowerCase())
+    );
+    return currentContacts;
   } catch {
     return null;
   }
 };
 export const getContactsId = async (id, token) => {
   try {
-    const response = await fetch(URL2 + `/api/contacts/?contact=${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      next: {
-        revalidate: 250,
-      },
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    return response.json();
+    console.log("getContactsId", id);
+    const response = await getAllContacts(token);
+    const currentContacts = response.filter(
+      (contactItem) => contactItem._id === id
+    );
+    return currentContacts;
   } catch {
     return null;
   }

@@ -1,39 +1,59 @@
-import { styled } from "@mui/material/styles";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableRow from "@mui/material/TableRow";
-import Link from "next/link";
+"use client";
+import { useEffect, useState } from "react";
+import { ContactSearch } from "./ContactSearch";
+import { Container } from "@mui/system";
+import { getContacts } from "../../services/getContacts";
+import {
+  Table,
+  TableBody,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
+import { ContactItem, StyledTableCell } from "./ContactItem";
+import { useSession } from "next-auth/react";
+import Loading from "../loading";
 
-export const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-    fontSize: "26px",
-    align: "right",
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 20,
-  },
-}));
-
-export const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
-const properties = ["name", "login", "sex", "phone"];
-const ContactList = ({ item }) => {
+const ContactList = () => {
+  const [contacts, setContacts] = useState([]);
+  const { data: session } = useSession();
+  useEffect(() => {
+    if (session && session.user) {
+      getContacts(session.user.email).then(setContacts);
+    }
+  }, [session]);
+  if (contacts.length === 0) {
+    return (
+      <div className="container">
+        <h1>Contacts loading...</h1>
+        <Loading />
+      </div>
+    );
+  }
   return (
-    <StyledTableRow>
-      {properties.map((e) => (
-        <StyledTableCell key={e}>
-          <Link href={`/contacts/${item._id}`}>{item[e]}</Link>
-        </StyledTableCell>
-      ))}
-    </StyledTableRow>
+    <Container sx={{ mt: "30px" }}>
+      <h1>Contacts</h1>
+      <ContactSearch onSearch={setContacts} />
+
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 700 }}>
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>Name</StyledTableCell>
+              <StyledTableCell>Login</StyledTableCell>
+              <StyledTableCell>Gender</StyledTableCell>
+              <StyledTableCell>Phone</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {contacts.map((item) => (
+              <ContactItem item={item} key={item._id} />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Container>
   );
 };
 

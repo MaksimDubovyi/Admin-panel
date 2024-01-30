@@ -1,8 +1,8 @@
-const URL = "http://localhost:3000/api/login";
-
 export const authLogin = async (phone, password) => {
   try {
-    const res = await fetch(URL, {
+    const url = process.env.NEXT_URL_LOGIN;
+
+    const res = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
