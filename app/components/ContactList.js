@@ -23,6 +23,7 @@ const ContactList = () => {
       getContacts(session.user.email).then(setContacts);
     }
   }, [session]);
+
   if (contacts.length === 0) {
     return (
       <div className="container">
