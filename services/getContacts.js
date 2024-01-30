@@ -1,8 +1,9 @@
 "use server";
+
 const getAllContacts = async (token) => {
   try {
     const url = process.env.NEXT_URL_GET_USERS;
-    const response = await fetch(url, {
+    const response = await fetch("http://164.92.243.161:5001/api/all-users", {
       next: {
         revalidate: 150,
       },
