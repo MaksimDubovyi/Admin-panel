@@ -1,0 +1,8 @@
+.p{
+    padding-left: 05px;
+    margin: 5px 2px;
+    max-width: 150px;
+    overflow: hidden;
+	text-overflow: ellipsis; /* Додає трохи місця для завершення тексту (...) */
+	white-space: nowrap; /* Забороняє перенос тексту на новий рядок */
+}

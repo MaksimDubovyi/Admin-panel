@@ -1,23 +1,15 @@
 //creatorId - ябида, targetId - на кого жалуются
-export interface Сomplaints {
-  _id: string;
-  creatorId: string;
-  targetId: string;
-  type: ComplaintTypes;
-  status: ComplaintStatuses;
-  message: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
+// export interface Сomplaints {
+//   _id: string;
+//   creatorId: string;
+//   targetId: string;
+//   type: ComplaintTypes;
+//   status: ComplaintStatuses;
+//   message: string;
+//   createdAt: Date;
+//   updatedAt: Date;
+// }
 //типы жалоб
-export enum ComplaintTypes {
-  SPAM = "spam",
-  CONTENT = "content",
-  OTHER = "other",
-}
+export const ComplaintTypes = ["spam", "content", "other"];
 
-export enum ComplaintStatuses {
-  NEW = "new",
-  PENDING = "pending",
-  CLOSED = "closed",
-}
+export const ComplaintStatuses = ["new", "pending", "closed"];

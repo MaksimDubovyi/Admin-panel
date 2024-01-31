@@ -3,7 +3,7 @@
 const getAllContacts = async (token) => {
   try {
     const url = process.env.NEXT_URL_GET_USERS;
-    const response = await fetch("http://164.92.243.161:5001/api/all-users", {
+    const response = await fetch(url, {
       next: {
         revalidate: 150,
       },
@@ -39,7 +39,6 @@ export const getContactsBySearch = async (search, token) => {
 };
 export const getContactsId = async (id, token) => {
   try {
-    console.log("getContactsId", id);
     const response = await getAllContacts(token);
     const currentContacts = response.filter(
       (contactItem) => contactItem._id === id
