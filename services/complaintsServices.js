@@ -1,46 +1,37 @@
 "use server";
 import { tempComplaints } from "../app/complaints/tempData";
 
+export const getAllComplaints = async (token) => {
+  return tempComplaints;
+};
+// const getAllComplaints = async (token) => {
+//   try {
+//     const url = process.env.NEXT_URL_GET_COMPLAINTS;
+//     console.log("token", token);
+//     const response = await fetch(url, {
+//       next: {
+//         revalidate: 150,
+//       },
+//       method: "GET",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${token}`,
+//       },
+//     });
+//     if (!response.ok) {
+//       throw new Error("Unable to fetch contacts");
+//     }
+//     return response.json();
+//   } catch (error) {
+//     return null;
+//   }
+// };
 export const getComplaints = async (token) => {
-  return tempComplaints;
-};
-
-export const getComplaintsSortStatus = async (token) => {
-  tempComplaints.sort((a, b) => {
-    const statusOrder = ["new", "pending", "closed"];
-    const statusA = statusOrder.indexOf(a.status);
-    const statusB = statusOrder.indexOf(b.status);
-    return statusA - statusB;
-  });
-  return tempComplaints;
-};
-export const getComplaintsSortType = async (token) => {
-  tempComplaints.sort((a, b) => {
-    const statusOrder = ["spam", "other", "content"];
-    const statusA = statusOrder.indexOf(a.type);
-    const statusB = statusOrder.indexOf(b.type);
-    return statusA - statusB;
-  });
-  return tempComplaints;
-};
-
-export const getComplaintsBySearchType = async (type, token) => {
   try {
-    const filteredComplaints = tempComplaints.filter((complaint) => {
-      return complaint.type === type;
-    });
-    return filteredComplaints;
-  } catch {
-    return null;
-  }
-};
-export const getComplaintsBySearchStatus = async (status, token) => {
-  try {
-    const filteredComplaints = tempComplaints.filter((complaint) => {
-      return complaint.status === status;
-    });
-    return filteredComplaints;
-  } catch {
+    const response = await getAllComplaints(token);
+    // console.log("getComplaints", response);
+    return response;
+  } catch (error) {
     return null;
   }
 };

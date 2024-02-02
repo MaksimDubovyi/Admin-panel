@@ -6,14 +6,15 @@ import { useSession } from "next-auth/react";
 
 export default function Contact({ params: { id } }) {
   const [profile, setProfile] = useState(null);
+  const [user, setUser] = useState(null);
   const { data: session } = useSession();
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (session && session.user) {
           const result = await getContactsId(id, session.user.email);
-          const { profile, login, name, dof } = result[0];
-          console.log("result[0]", result[0]);
+          const { profile, login, name, dof, profileImage } = result[0];
+          setUser(result[0]);
           const hobbiesData = selectType("HOBBIES").reduce(
             (accumulator, currentValue, index) => {
               accumulator[currentValue.slug + "_H"] = [];
@@ -33,6 +34,7 @@ export default function Contact({ params: { id } }) {
             name: name,
             login: login,
             dof: dof,
+            profileImage: profileImage,
             ...profile,
             ...hobbiesData,
           };
@@ -46,5 +48,5 @@ export default function Contact({ params: { id } }) {
     fetchData();
   }, [id, session]);
 
-  return <FormikForm profile={profile} />;
+  return <FormikForm initialValues={profile} user={user} />;
 }

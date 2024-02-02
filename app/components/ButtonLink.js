@@ -21,7 +21,7 @@ const ButtonLink = ({ navLinks }) => {
         <Grid item xs={5}>
           <SignInForm />
         </Grid>
-        {session && session.user.image
+        {session
           ? navLinks.map((link) => {
               const isActive = pathname === link.href;
               const linkClasses = isActive ? `error` : "inherit";

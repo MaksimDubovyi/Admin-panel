@@ -13,6 +13,7 @@ import * as DICTS from "../../../data";
 import { HobbiesList } from "./CustomSelect/HobbiesList";
 import { FormikDate, parseDate } from "./date/FormikDate";
 import { parse, isBefore, subYears } from "date-fns";
+import { ImageList } from "./ImageList";
 
 const checkAge = (date) => {
   let day, month, year;
@@ -67,8 +68,8 @@ const validation = (values) => {
   return errors;
 };
 
-const FormikForm = ({ profile }) => {
-  if (profile === null) {
+const FormikForm = ({ initialValues, user }) => {
+  if (initialValues === null) {
     return (
       <div className="container">
         <h1>Contact loading...</h1>
@@ -79,7 +80,7 @@ const FormikForm = ({ profile }) => {
   return (
     <Container maxWidth="xl" sx={{ mb: "150px" }}>
       <Formik
-        initialValues={profile}
+        initialValues={initialValues}
         validate={(values) => validation(values)}
         onSubmit={(values, { setSubmitting }) => {
           const filteredArrays = Object.keys(values).filter((key) =>
@@ -105,18 +106,26 @@ const FormikForm = ({ profile }) => {
             resultObj.dof = parseDate(resultObj.dof);
           }
 
-          console.log("resultObj", resultObj);
+          const { profileImage, login, name, dof, ...profile } = resultObj;
+          const fullResultObj = {
+            ...user,
+            profileImage,
+            login,
+            name,
+            dof,
+            profile,
+          };
+          console.log("resultObj", fullResultObj);
         }}
       >
         {({
           values,
           errors,
           touched,
+          setFieldValue,
           handleChange,
           handleBlur,
           handleSubmit,
-          isSubmitting,
-          /* and other goodies */
         }) => (
           <form onSubmit={handleSubmit}>
             {formComponents.map((item) => {
@@ -206,11 +215,11 @@ const FormikForm = ({ profile }) => {
               })}
             </Grid>
 
-            <Grid container spacing={2}>
-              {formComponents.map((item) => {
-                if (item.type === "hobbieslist") {
-                  return (
-                    <Grid key={item.name} item xs={12} sx={{ mt: "50px" }}>
+            {formComponents.map((item) => {
+              if (item.type === "hobbieslist") {
+                return (
+                  <Grid key={item.name} container spacing={2}>
+                    <Grid item xs={12} sx={{ mt: "50px" }}>
                       <Typography
                         align="center"
                         color="textSecondaty"
@@ -226,12 +235,24 @@ const FormikForm = ({ profile }) => {
                         handleBlur={handleBlur}
                         values={values}
                       />
-                    </Grid>
+                    </Grid>{" "}
+                  </Grid>
+                );
+              }
+            })}
+            <Grid container spacing={2} sx={{ m: 1 }}>
+              {formComponents.map((item) => {
+                if (item.type === "profileImage") {
+                  return (
+                    <ImageList
+                      key={item.name}
+                      values={values}
+                      setFieldValue={setFieldValue}
+                    />
                   );
                 }
               })}
             </Grid>
-
             <Button
               fullWidth
               sx={{ mt: "20px" }}

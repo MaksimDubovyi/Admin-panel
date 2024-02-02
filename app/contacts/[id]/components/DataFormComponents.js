@@ -129,6 +129,11 @@ const formComponents = [
     type: "goal",
     label: "GOALS",
   },
+  {
+    name: "profileImage",
+    type: "profileImage",
+    label: "IMAGE",
+  },
 ];
 
 export { formComponents };

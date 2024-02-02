@@ -15,7 +15,6 @@ export const authConfig = {
 
         try {
           const user = await res.json();
-
           if (user && user.error) {
             return null;
           }
@@ -25,7 +24,6 @@ export const authConfig = {
               id: user.user.id,
               name: user.user.name,
               email: user.token,
-              image: user.user.isAdmin,
             };
 
             return sessionUser;

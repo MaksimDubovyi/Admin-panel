@@ -32,7 +32,7 @@ const ContactList = () => {
       </div>
     );
   }
-  console.log("contacts", contacts);
+  // console.log("contacts", contacts);
   return (
     <Container sx={{ mt: "30px" }}>
       <h1>Contacts</h1>
