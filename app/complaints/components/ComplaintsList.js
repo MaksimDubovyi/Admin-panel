@@ -13,6 +13,7 @@ const ComplaintsList = () => {
   useEffect(() => {
     if (session && session.user) {
       getComplaints(session.user.email).then(setComplaints);
+      console.log("response", complaints);
     }
   }, [session]);
 

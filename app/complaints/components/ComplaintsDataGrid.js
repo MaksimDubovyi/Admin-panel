@@ -24,37 +24,25 @@ const ComplaintsDataGrid = ({ complaints }) => {
   const [editRowsModel, setEditRowsModel] = useState({});
   const [state, setState] = useState([]);
   const [open, setOpen] = useState(false);
-  const [selectedStatus, setSelectedStatus] = useState("");
-
-  const handleYesClick = () => {
-    setOpen(false);
-    setState((prev) => {
-      const updatedRows = prev.map((row) =>
-        editRowsModel[row._id]
-          ? { ...row, status: selectedStatus || row.status }
-          : row
-      );
-      return updatedRows;
-    });
-
-    setSelectedStatus("");
-  };
 
   const onClose = () => {
     setOpen(false);
-    const keys = Object.keys(editRowsModel);
-    if (keys.length > 0) {
-      const lastKey = keys[keys.length - 1];
-      const newEditRowsModel = { ...editRowsModel };
-      delete newEditRowsModel[lastKey];
-      setEditRowsModel(newEditRowsModel);
-    }
   };
 
   const handleStatusChange = (e, params) => {
-    setSelectedStatus(e.target.value);
-    setEditRowsModel((prev) => ({ ...prev, [params.id]: true }));
-    setOpen(true);
+    const newStatus = e.target.value;
+
+    setEditRowsModel((prev) => {
+      const updatedEditRowsModel = { ...prev, [params.id]: true };
+      return updatedEditRowsModel;
+    });
+
+    setState((prev) => {
+      const updatedRows = prev.map((row) =>
+        row._id === params.id ? { ...row, status: newStatus } : row
+      );
+      return updatedRows;
+    });
   };
   const onSubmit = () => {
     console.log("state", state);
@@ -62,6 +50,7 @@ const ComplaintsDataGrid = ({ complaints }) => {
     const selectedRows = state.filter((row) => editRowsModel[row._id]);
 
     console.log("Selected Rows:", selectedRows);
+    setOpen(false);
   };
 
   useEffect(() => {
@@ -168,7 +157,7 @@ const ComplaintsDataGrid = ({ complaints }) => {
         sx={{ m: 1 }}
         variant="contained"
         color="success"
-        onClick={onSubmit}
+        onClick={() => setOpen(true)}
       >
         update
       </Button>
@@ -204,7 +193,7 @@ const ComplaintsDataGrid = ({ complaints }) => {
           <Button variant="contained" color="error" onClick={onClose}>
             no
           </Button>
-          <Button variant="contained" color="success" onClick={handleYesClick}>
+          <Button variant="contained" color="success" onClick={onSubmit}>
             yes
           </Button>
         </DialogActions>
