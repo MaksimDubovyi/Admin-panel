@@ -1,7 +1,7 @@
 "use server";
 export const authLogin = async (phone, password) => {
   try {
-    const url = process.env.NEXT_URL_LOGIN;
+    const url = process.env.NEXTAUTH_URL;
 
     const res = await fetch(url, {
       method: "POST",
